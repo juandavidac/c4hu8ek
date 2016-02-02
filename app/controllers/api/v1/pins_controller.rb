@@ -21,7 +21,7 @@ class Api::V1::PinsController < ApplicationController
 
     def restric_access
       authenticate_or_request_with_http_token do |token, options|
-        user.exists?(api_token: token)
+        User.find_by(api_token: token)
       end
     end
 end
