@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   before_save :ensure_authentication_token
 
   def ensure_authentication_token
-    if authentication_token.blank?
+    if api_token.blank?
       generate_token
     end
   end
