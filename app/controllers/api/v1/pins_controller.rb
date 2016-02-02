@@ -24,7 +24,10 @@ class Api::V1::PinsController < ApplicationController
 
     def restrict
      authenticate_or_request_with_http_token do |token, options|
-       User.exists?(api_token: token)
+       user_email=params[:user_email].presence
+       user = user_email && User.find_by_email(user_email)
+       if user && User.exists?(api_token: token)
+         sign_in user
      end
    end
 
