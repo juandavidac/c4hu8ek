@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   after_initialize :generate_token
+
+=begin
   before_save :ensure_authentication_token
 
   def ensure_authentication_token
@@ -12,7 +14,7 @@ class User < ActiveRecord::Base
       generate_token
     end
   end
-
+=end
 
   private
     def generate_token
