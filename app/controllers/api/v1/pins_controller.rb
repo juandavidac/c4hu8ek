@@ -1,6 +1,6 @@
 class Api::V1::PinsController < ApplicationController
-  before_action :restrict
-  before_action :authenticate_user!
+  before_filter :restrict
+#  before_action :authenticate_user!
 
   def index
     render json: Pin.all.order('created_at DESC')
@@ -24,8 +24,9 @@ class Api::V1::PinsController < ApplicationController
 
     def restrict
      authenticate_or_request_with_http_token do |token, options|
-       user_email=params[:email].presence
-       user = user_email && User.find_by_email(user_email)
+       #user_email=params[:email].presence
+       user_email = options.blank?? nil : options[:email]
+       user = user_email && User.find_by(email: user_email)
        if user && User.exists?(api_token: token)
          sign_in user
        end
