@@ -21,6 +21,15 @@ class Api::V1::PinsController < ApplicationController
       params.require(:pin).permit(:title, :image_url)
     end
 
-
+    def restrict
+     authenticate_with_http_token do |token, options|
+       #user_email=params[:email].presence
+       user_email = options.blank?? nil : options[:email]
+       user = user_email && User.find_by(email: user_email)
+       if user && User.exists?(api_token: token)
+         sign_in user
+       end
+     end
+    end
 
 end

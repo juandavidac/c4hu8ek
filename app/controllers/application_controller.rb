@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  
+
 #  before_action :authenticate_user!
 =begin
   before_action :authenticate_user_from_token!
@@ -18,17 +18,4 @@ class ApplicationController < ActionController::Base
     end
   end
 =end
-  private
-
-    def restrict
-     authenticate_with_http_token do |token, options|
-       #user_email=params[:email].presence
-       user_email = options.blank?? nil : options[:email]
-       user = user_email && User.find_by(email: user_email)
-       if user && User.exists?(api_token: token)
-         sign_in user
-       end
-     end
-    end
-
 end
