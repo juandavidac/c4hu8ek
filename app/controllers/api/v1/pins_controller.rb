@@ -1,5 +1,5 @@
 class Api::V1::PinsController < ApplicationController
-
+  before_filter :restrict
 
   def index
     render json: Pin.all.order('created_at DESC')
@@ -22,5 +22,5 @@ class Api::V1::PinsController < ApplicationController
     end
 
 
-    
+
 end
