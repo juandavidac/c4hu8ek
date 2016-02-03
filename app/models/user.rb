@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   after_initialize :generate_token
 
+  
+
 =begin
   before_save :ensure_authentication_token
 

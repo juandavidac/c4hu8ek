@@ -1,6 +1,6 @@
 class Api::V1::PinsController < ApplicationController
 
-  before_action :restrict
+  #before_action :restrict
 
   def index
     render json: Pin.all.order('created_at DESC')
@@ -34,12 +34,12 @@ class Api::V1::PinsController < ApplicationController
      end
     end
 =end
-
+=begin
   def restrict
     authenticate_or_request_with_http_token do |token, options|
       @user = User.where(api_token: token).first
     end
   end
+=end
 
-  
 end
